@@ -63,22 +63,27 @@ function setup() {
   c4=new Class("Math");
   c5=new Class("History");
   
-  //Class Selector
-  classSelector=createSelect();
-  classSelector.option(c1);
-  classSelector.option(c2);
-  classSelector.option(c3);
-  classSelector.option(c4);
-  classSelector.option(c5);
-  classSelector.selected(c1);
-  classSelector.position(0,0);
   
-  //Grade Input
-  text("Input Grades",10,30);
-  gradeInput=createInput();
-  gradeInput.position(10,100);
+  //Grade Inputs
+  text("Input Grades",10,150);
+  gI1=createInput();
+  gI1.position(120,150);
+  gI1.size(75,15)
+  gI2=createInput();
+  gI2.position(220,150);
+  gI2.size(75,15)
+  gI3=createInput();
+  gI3.position(320,150);
+  gI3.size(75,15)
+  gI4=createInput();
+  gI4.position(420,150);
+  gI4.size(75,15)
+  gI5=createInput();
+  gI5.position(520,150);
+  gI5.size(75,15)
   
-  gradeSubmit=createButton("Add Grade");
+  
+  gradeSubmit=createButton("Add Grades");
   gradeSubmit.mousePressed(submit);
   gradeSubmit.position(200,100);
   
@@ -104,35 +109,35 @@ function resetSystem(){
 
 function clearInput(){
   //Clears value in grade input
-  gradeInput.value("");
+  gI1.value("");
+  gI2.value("");
+  gI3.value("");
+  gI4.value("");
+  gI5.value("");
 }
 
 function submit(){
   //Submits grades
-  if(!isNaN(parseInt(gradeInput.value()))){
-    selectedClass.addScore(parseInt(gradeInput.value()));
+
+  //check if grades are numbers in the ugliest way possible
+var invalid=isNaN(parseInt(gI1.value()))||isNaN(parseInt(gI2.value()))||isNaN(parseInt(gI3.value()))||isNaN(parseInt(gI4.value()))||isNaN(parseInt(gI5.value()));
+  
+  if(!invalid){
+    c1.addScore(parseInt(gI1.value()));c1.updateStats();
+    c2.addScore(parseInt(gI2.value()));c2.updateStats();
+    c3.addScore(parseInt(gI3.value()));c3.updateStats();
+    c4.addScore(parseInt(gI4.value()));c4.updateStats();
+    c5.addScore(parseInt(gI5.value()));c5.updateStats();
   }
-  selectedClass.updateStats();
+  
 }
 
 
 //Main Loop
 function draw() {
   background(220);
-  text("Input Grades",10,80);
-  
-  selection=classSelector.selected();
-  if(selection==("Programming")){
-    selectedClass=c1;
-  }else if(selection==("Art")){
-    selectedClass=c2;
-  }else if(selection==("Science")){
-    selectedClass=c3;
-  }else if(selection==("Math")){
-    selectedClass=c4;
-  }else if(selection==("History")){
-    selectedClass=c5;
-  }
+  text("Input Grades",10,165);
+
   
   //Display handlers
   c1.display(120,200);
